@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>SistemaAcademico.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SistemaAcademico.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">model</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">Serializable</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">SistemaAcademico </span><span class="s0">implements </span><span class="s1">Serializable </span><span class="s2">{</span>
+
+    <span class="s0">private static </span><span class="s1">SistemaAcademico instancia</span><span class="s2">;</span>
+
+    <span class="s0">public static </span><span class="s1">SistemaAcademico getInstance</span><span class="s2">() {</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">instancia </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) </span><span class="s1">instancia </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SistemaAcademico</span><span class="s2">();</span>
+        <span class="s0">return </span><span class="s1">instancia</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private </span><span class="s1">SistemaAcademico</span><span class="s2">() {</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private </span><span class="s1">String rolSeleccionado</span><span class="s2">; </span><span class="s3">// &quot;PROFESOR&quot; o &quot;ESTUDIANTE&quot;</span>
+
+    <span class="s0">public </span><span class="s1">String getRolSeleccionado</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">rolSeleccionado</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setRolSeleccionado</span><span class="s2">(</span><span class="s1">String rolSeleccionado</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">rolSeleccionado </span><span class="s2">= </span><span class="s1">rolSeleccionado</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">setInstance</span><span class="s2">(</span><span class="s1">SistemaAcademico nuevaInstancia</span><span class="s2">) {</span>
+        <span class="s1">instancia </span><span class="s2">= </span><span class="s1">nuevaInstancia</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Departamento</span><span class="s2">&gt; </span><span class="s1">departamentos </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">asignaturas </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Profesor</span><span class="s2">&gt; </span><span class="s1">profesores </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Clase</span><span class="s2">&gt; </span><span class="s1">clases </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Estudiante</span><span class="s2">&gt; </span><span class="s1">estudiantes </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Inscripcion</span><span class="s2">&gt; </span><span class="s1">inscripciones </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Nomina</span><span class="s2">&gt; </span><span class="s1">nominas </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+    <span class="s0">public void </span><span class="s1">agregarAsignatura</span><span class="s2">(</span><span class="s1">Asignatura asignatura</span><span class="s2">) {</span>
+        <span class="s1">asignaturas</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">asignatura</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">agregarClase</span><span class="s2">(</span><span class="s1">Clase c</span><span class="s2">) {</span>
+        <span class="s1">clases</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">c</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Departamento</span><span class="s2">&gt; </span><span class="s1">getDepartamentos</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">departamentos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setDepartamentos</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Departamento</span><span class="s2">&gt; </span><span class="s1">departamentos</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">departamentos </span><span class="s2">= </span><span class="s1">departamentos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">getAsignaturas</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">asignaturas</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setAsignaturas</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">asignaturas</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">asignaturas </span><span class="s2">= </span><span class="s1">asignaturas</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Profesor</span><span class="s2">&gt; </span><span class="s1">getProfesores</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">profesores</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setProfesores</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Profesor</span><span class="s2">&gt; </span><span class="s1">profesores</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">profesores </span><span class="s2">= </span><span class="s1">profesores</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Clase</span><span class="s2">&gt; </span><span class="s1">getClases</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">clases</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setClases</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Clase</span><span class="s2">&gt; </span><span class="s1">clases</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">clases </span><span class="s2">= </span><span class="s1">clases</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Estudiante</span><span class="s2">&gt; </span><span class="s1">getEstudiantes</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">estudiantes</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setEstudiantes</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Estudiante</span><span class="s2">&gt; </span><span class="s1">estudiantes</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">estudiantes </span><span class="s2">= </span><span class="s1">estudiantes</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Inscripcion</span><span class="s2">&gt; </span><span class="s1">getInscripciones</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">inscripciones</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setInscripciones</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Inscripcion</span><span class="s2">&gt; </span><span class="s1">inscripciones</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">inscripciones </span><span class="s2">= </span><span class="s1">inscripciones</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Nomina</span><span class="s2">&gt; </span><span class="s1">getNominas</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">nominas</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setNominas</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Nomina</span><span class="s2">&gt; </span><span class="s1">nominas</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">nominas </span><span class="s2">= </span><span class="s1">nominas</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span></pre>
+</body>
+</html>

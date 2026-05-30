@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>Nomina.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Nomina.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">model</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">Serializable</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">time</span><span class="s2">.</span><span class="s1">LocalDate</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Nomina </span><span class="s0">implements </span><span class="s1">Serializable </span><span class="s2">{</span>
+
+    <span class="s0">private int </span><span class="s1">idNomina</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String periodo</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">LocalDate fechaGeneracion</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Profesor</span><span class="s2">&gt; </span><span class="s1">profesores</span><span class="s2">;</span>
+    <span class="s0">private double </span><span class="s1">totalPagos</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">Nomina</span><span class="s2">(</span><span class="s0">int </span><span class="s1">idNomina</span><span class="s2">, </span><span class="s1">String periodo</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">idNomina </span><span class="s2">= </span><span class="s1">idNomina</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">periodo </span><span class="s2">= </span><span class="s1">periodo</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">fechaGeneracion </span><span class="s2">= </span><span class="s1">LocalDate</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">totalPagos </span><span class="s2">= </span><span class="s0">this</span><span class="s2">.</span><span class="s1">getTotalPagos</span><span class="s2">();</span>
+        <span class="s1">profesores </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">calcularPagos</span><span class="s2">(){</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;========= NOMINA PROFESORES DE CATEDRA ========&quot;</span><span class="s2">);</span>
+
+        <span class="s0">for</span><span class="s2">(</span><span class="s1">Profesor profesor</span><span class="s2">: </span><span class="s1">profesores</span><span class="s2">){</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">profesor </span><span class="s0">instanceof </span><span class="s1">ProfesorCatedra</span><span class="s2">){</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Nombre: &quot; </span><span class="s2">+ </span><span class="s1">profesor</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">() + </span><span class="s3">&quot;Salario Semanal: &quot; </span><span class="s2">+ </span><span class="s1">profesor</span><span class="s2">.</span><span class="s1">calcularSalario</span><span class="s2">());</span>
+                <span class="s1">totalPagos</span><span class="s2">+=</span><span class="s1">profesor</span><span class="s2">.</span><span class="s1">calcularSalario</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getIdNomina</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">idNomina</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setIdNomina</span><span class="s2">(</span><span class="s0">int </span><span class="s1">idNomina</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">idNomina </span><span class="s2">= </span><span class="s1">idNomina</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getPeriodo</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">periodo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setPeriodo</span><span class="s2">(</span><span class="s1">String periodo</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">periodo </span><span class="s2">= </span><span class="s1">periodo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">LocalDate getFechaGeneracion</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">fechaGeneracion</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setFechaGeneracion</span><span class="s2">(</span><span class="s1">LocalDate fechaGeneracion</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">fechaGeneracion </span><span class="s2">= </span><span class="s1">fechaGeneracion</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public double </span><span class="s1">getTotalPagos</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">totalPagos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setTotalPagos</span><span class="s2">(</span><span class="s0">double </span><span class="s1">totalPagos</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">totalPagos </span><span class="s2">= </span><span class="s1">totalPagos</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Profesor</span><span class="s2">&gt; </span><span class="s1">getProfesores</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">profesores</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setProfesores</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Profesor</span><span class="s2">&gt; </span><span class="s1">profesores</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">profesores </span><span class="s2">= </span><span class="s1">profesores</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">String toString</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s3">&quot;Nomina{&quot; </span><span class="s2">+</span>
+                <span class="s3">&quot;idNomina=&quot; </span><span class="s2">+ </span><span class="s1">idNomina </span><span class="s2">+</span>
+                <span class="s3">&quot;, periodo='&quot; </span><span class="s2">+ </span><span class="s1">periodo </span><span class="s2">+ </span><span class="s3">'</span><span class="s0">\'</span><span class="s3">' </span><span class="s2">+</span>
+                <span class="s3">&quot;, fechaGeneracion=&quot; </span><span class="s2">+ </span><span class="s1">fechaGeneracion </span><span class="s2">+</span>
+                <span class="s3">&quot;, profesores=&quot; </span><span class="s2">+ </span><span class="s1">profesores </span><span class="s2">+</span>
+                <span class="s3">&quot;, totalPagos=&quot; </span><span class="s2">+ </span><span class="s1">totalPagos </span><span class="s2">+</span>
+                <span class="s3">'}'</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

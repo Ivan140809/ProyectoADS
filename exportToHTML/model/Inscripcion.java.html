@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>Inscripcion.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Inscripcion.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">model</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">Serializable</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">time</span><span class="s2">.</span><span class="s1">LocalDate</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Inscripcion </span><span class="s0">implements </span><span class="s1">Serializable </span><span class="s2">{</span>
+
+    <span class="s0">private </span><span class="s1">Estudiante estudiante</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Clase clase</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">LocalDate fechaInscripcion</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">semestre</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">EstadoClase estadoClase</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">Inscripcion</span><span class="s2">(</span><span class="s1">Estudiante estudiante</span><span class="s2">, </span><span class="s1">Clase clase</span><span class="s2">, </span><span class="s0">int </span><span class="s1">semestre</span><span class="s2">, </span><span class="s1">EstadoClase estadoClase</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">estudiante </span><span class="s2">= </span><span class="s1">estudiante</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">clase </span><span class="s2">= </span><span class="s1">clase</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">fechaInscripcion </span><span class="s2">= </span><span class="s1">LocalDate</span><span class="s2">.</span><span class="s1">now</span><span class="s2">();</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">semestre </span><span class="s2">= </span><span class="s1">semestre</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">estadoClase </span><span class="s2">= </span><span class="s1">estadoClase</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Estudiante getEstudiante</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">estudiante</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setEstudiante</span><span class="s2">(</span><span class="s1">Estudiante estudiante</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">estudiante </span><span class="s2">= </span><span class="s1">estudiante</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Clase getClase</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">clase</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setClase</span><span class="s2">(</span><span class="s1">Clase clase</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">clase </span><span class="s2">= </span><span class="s1">clase</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">LocalDate getFechaInscripcion</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">fechaInscripcion</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setFechaInscripcion</span><span class="s2">(</span><span class="s1">LocalDate fechaInscripcion</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">fechaInscripcion </span><span class="s2">= </span><span class="s1">fechaInscripcion</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getSemestre</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">semestre</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setSemestre</span><span class="s2">(</span><span class="s0">int </span><span class="s1">semestre</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">semestre </span><span class="s2">= </span><span class="s1">semestre</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">EstadoClase getEstadoClase</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">estadoClase</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setEstadoClase</span><span class="s2">(</span><span class="s1">EstadoClase estadoClase</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">estadoClase </span><span class="s2">= </span><span class="s1">estadoClase</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">String toString</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s3">&quot;Inscripcion{&quot; </span><span class="s2">+</span>
+                <span class="s3">&quot;estudiante=&quot; </span><span class="s2">+ </span><span class="s1">estudiante </span><span class="s2">+</span>
+                <span class="s3">&quot;, clase=&quot; </span><span class="s2">+ </span><span class="s1">clase </span><span class="s2">+</span>
+                <span class="s3">&quot;, fechaInscripcion='&quot; </span><span class="s2">+ </span><span class="s1">fechaInscripcion </span><span class="s2">+ </span><span class="s3">'</span><span class="s0">\'</span><span class="s3">' </span><span class="s2">+</span>
+                <span class="s3">&quot;, semestre=&quot; </span><span class="s2">+ </span><span class="s1">semestre </span><span class="s2">+</span>
+                <span class="s3">&quot;, estadoClase=&quot; </span><span class="s2">+ </span><span class="s1">estadoClase </span><span class="s2">+</span>
+                <span class="s3">'}'</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>Profesor.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Profesor.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">model</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">Serializable</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+
+<span class="s0">public abstract class </span><span class="s1">Profesor </span><span class="s0">implements </span><span class="s1">Serializable </span><span class="s2">{</span>
+
+    <span class="s0">protected static int </span><span class="s1">NUM_MIN_HORAS</span><span class="s2">=</span><span class="s3">10</span><span class="s2">;</span>
+
+    <span class="s0">protected int </span><span class="s1">horasDictadas</span><span class="s2">;</span>
+    <span class="s0">protected int </span><span class="s1">codigo</span><span class="s2">;</span>
+    <span class="s0">protected </span><span class="s1">String nombre</span><span class="s2">;</span>
+    <span class="s0">protected </span><span class="s1">String tipo</span><span class="s2">;</span>
+    <span class="s0">protected </span><span class="s1">String correo</span><span class="s2">;</span>
+    <span class="s0">protected </span><span class="s1">Departamento departamento</span><span class="s2">;</span>
+    <span class="s0">protected </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Clase</span><span class="s2">&gt; </span><span class="s1">clasesDicta</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">Profesor</span><span class="s2">(</span><span class="s0">int </span><span class="s1">codigo</span><span class="s2">,  </span><span class="s1">String nombre</span><span class="s2">, </span><span class="s1">String tipo</span><span class="s2">, </span><span class="s1">String correo</span><span class="s2">, </span><span class="s1">Departamento departamento</span><span class="s2">, </span><span class="s0">int </span><span class="s1">horasDictadas</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">codigo </span><span class="s2">= </span><span class="s1">codigo</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">nombre </span><span class="s2">= </span><span class="s1">nombre</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">tipo </span><span class="s2">= </span><span class="s1">tipo</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">correo </span><span class="s2">= </span><span class="s1">correo</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">departamento </span><span class="s2">= </span><span class="s1">departamento</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">horasDictadas </span><span class="s2">= </span><span class="s1">horasDictadas</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">clasesDicta </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public abstract double </span><span class="s1">calcularSalario</span><span class="s2">();</span>
+
+    <span class="s0">public int </span><span class="s1">getCodigo</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">codigo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCodigo</span><span class="s2">(</span><span class="s0">int </span><span class="s1">codigo</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">codigo </span><span class="s2">= </span><span class="s1">codigo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getNombre</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">nombre</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setNombre</span><span class="s2">(</span><span class="s1">String nombre</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">nombre </span><span class="s2">= </span><span class="s1">nombre</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getCorreo</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">correo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setCorreo</span><span class="s2">(</span><span class="s1">String correo</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">correo </span><span class="s2">= </span><span class="s1">correo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String getTipo</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">tipo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public int </span><span class="s1">getHorasDictadas</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">horasDictadas</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setHorasDictadas</span><span class="s2">(</span><span class="s0">int </span><span class="s1">horasDictadas</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">horasDictadas </span><span class="s2">= </span><span class="s1">horasDictadas</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setTipo</span><span class="s2">(</span><span class="s1">String tipo</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">tipo </span><span class="s2">= </span><span class="s1">tipo</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Departamento getDepartamento</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">departamento</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setDepartamento</span><span class="s2">(</span><span class="s1">Departamento departamento</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">departamento </span><span class="s2">= </span><span class="s1">departamento</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Clase</span><span class="s2">&gt; </span><span class="s1">getClasesDicta</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s1">clasesDicta</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setClasesDicta</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Clase</span><span class="s2">&gt; </span><span class="s1">clasesDicta</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">clasesDicta </span><span class="s2">= </span><span class="s1">clasesDicta</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">String toString</span><span class="s2">() {</span>
+        <span class="s0">return </span><span class="s4">&quot;Profesor{&quot; </span><span class="s2">+</span>
+                <span class="s4">&quot;</span><span class="s0">\n </span><span class="s4">codigo=&quot; </span><span class="s2">+ </span><span class="s1">codigo </span><span class="s2">+</span>
+                <span class="s4">&quot;,</span><span class="s0">\n </span><span class="s4">nombre='&quot; </span><span class="s2">+ </span><span class="s1">nombre </span><span class="s2">+ </span><span class="s4">'</span><span class="s0">\'</span><span class="s4">' </span><span class="s2">+</span>
+                <span class="s4">&quot;,</span><span class="s0">\n </span><span class="s4">tipo='&quot; </span><span class="s2">+ </span><span class="s1">tipo </span><span class="s2">+ </span><span class="s4">'</span><span class="s0">\'</span><span class="s4">' </span><span class="s2">+</span>
+                <span class="s4">&quot;,</span><span class="s0">\n </span><span class="s4">correo='&quot; </span><span class="s2">+ </span><span class="s1">correo </span><span class="s2">+ </span><span class="s4">'</span><span class="s0">\'</span><span class="s4">' </span><span class="s2">+</span>
+                <span class="s4">&quot;,</span><span class="s0">\n </span><span class="s4">departamento=&quot; </span><span class="s2">+ (</span><span class="s1">departamento </span><span class="s2">!= </span><span class="s0">null </span><span class="s2">? </span><span class="s1">departamento</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">() : </span><span class="s4">&quot;null&quot;</span><span class="s2">) +</span>
+                <span class="s4">&quot;,</span><span class="s0">\n </span><span class="s4">horasDictadas=&quot; </span><span class="s2">+ </span><span class="s1">horasDictadas </span><span class="s2">+</span>
+                <span class="s4">&quot;,</span><span class="s0">\n </span><span class="s4">clasesDicta=&quot; </span><span class="s2">+ (</span><span class="s1">clasesDicta </span><span class="s2">!= </span><span class="s0">null </span><span class="s2">? </span><span class="s1">clasesDicta</span><span class="s2">.</span><span class="s1">size</span><span class="s2">() : </span><span class="s3">0</span><span class="s2">) +</span>
+                <span class="s4">'}'</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "fecha": "Sun Nov 23 22:13:38 GMT-05:00 2025",
+  "departamento": "Ingeniería de Sistemas",
+  "codigoProfesor": 1101,
+  "nombreProfesor": "Ana Torres",
+  "correoProfesor": "ana.torres@uni.edu",
+  "tipoProfesor": "Planta",
+  "asignaturas": [
+    {
+      "codigo": 3001,
+      "nombre": "Programación I",
+      "creditos": 3
+    }
+  ],
+  "totalAsignaturas": 1
+}

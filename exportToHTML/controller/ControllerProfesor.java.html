@@ -1,0 +1,263 @@
+<html>
+<head>
+<title>ControllerProfesor.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ControllerProfesor.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">controller</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXMLLoader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Parent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">VBox</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">model</span><span class="s2">.*;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXML</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">AnchorPane</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">ControllerProfesor </span><span class="s2">{</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextArea taInformacion</span><span class="s2">;</span>
+
+    <span class="s1">SistemaAcademico sa </span><span class="s2">= </span><span class="s1">SistemaAcademico</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+<span class="s3">//listar profesores por tipo, cuales son catedra (su tipo), planta</span>
+
+    <span class="s3">// Métdo que lista segun tipo</span>
+    <span class="s0">public void </span><span class="s1">listarProfesores</span><span class="s2">(</span><span class="s1">Departamento departamento</span><span class="s2">, </span><span class="s1">String tipo</span><span class="s2">) {</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">departamento </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">mostrarAlerta</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">ERROR</span><span class="s2">, </span><span class="s4">&quot;Error&quot;</span><span class="s2">, </span><span class="s4">&quot;Departamento no encontrado.&quot;</span><span class="s2">);</span>
+            <span class="s1">taInformacion</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">();</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">StringBuilder sb </span><span class="s2">= </span><span class="s0">new </span><span class="s1">StringBuilder</span><span class="s2">();</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Profesor profesor </span><span class="s2">: </span><span class="s1">departamento</span><span class="s2">.</span><span class="s1">getProfesores</span><span class="s2">()) {</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s4">&quot;Planta&quot;</span><span class="s2">.</span><span class="s1">equalsIgnoreCase</span><span class="s2">(</span><span class="s1">tipo</span><span class="s2">) &amp;&amp; </span><span class="s1">profesor </span><span class="s0">instanceof </span><span class="s1">ProfesorPlanta</span><span class="s2">) {</span>
+                <span class="s1">sb</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">profesor</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">())</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot; - &quot;</span><span class="s2">)</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">profesor</span><span class="s2">.</span><span class="s1">getCorreo</span><span class="s2">())</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+
+            <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s4">&quot;Catedra&quot;</span><span class="s2">.</span><span class="s1">equalsIgnoreCase</span><span class="s2">(</span><span class="s1">tipo</span><span class="s2">) &amp;&amp; </span><span class="s1">profesor </span><span class="s0">instanceof </span><span class="s1">ProfesorCatedra</span><span class="s2">) {</span>
+                <span class="s1">sb</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">profesor</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">())</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot; - &quot;</span><span class="s2">)</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s1">profesor</span><span class="s2">.</span><span class="s1">getCorreo</span><span class="s2">())</span>
+                        <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">sb</span><span class="s2">.</span><span class="s1">length</span><span class="s2">() == </span><span class="s5">0</span><span class="s2">) {</span>
+            <span class="s1">mostrarAlerta</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">INFORMATION</span><span class="s2">,</span>
+                    <span class="s4">&quot;Sin resultados&quot;</span><span class="s2">,</span>
+                    <span class="s4">&quot;No hay profesores de tipo &quot; </span><span class="s2">+ </span><span class="s1">tipo </span><span class="s2">+ </span><span class="s4">&quot; en este departamento.&quot;</span><span class="s2">);</span>
+            <span class="s1">taInformacion</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s4">&quot;No hay profesores de tipo &quot; </span><span class="s2">+ </span><span class="s1">tipo </span><span class="s2">+ </span><span class="s4">&quot; en este departamento.&quot;</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s3">// Mostrar resultados correctamente</span>
+        <span class="s1">taInformacion</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">sb</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bAsignaturas</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bCancelar</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bClases</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bConsultarAsignaturas</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bConsultarCarga</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bDatosAcademicos</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bListar</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bListarProfesores</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">RadioButton rbCatedra</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">RadioButton rbPlanta</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">AnchorPane spInformacionProfe</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextField tfDepartamento</span><span class="s2">;</span>
+
+    <span class="s0">private void </span><span class="s1">mostrarEnAnchorPane</span><span class="s2">(</span><span class="s1">String texto</span><span class="s2">) {</span>
+        <span class="s1">spInformacionProfe</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">clear</span><span class="s2">();</span>
+
+        <span class="s1">TextArea ta </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TextArea</span><span class="s2">();</span>
+        <span class="s1">ta</span><span class="s2">.</span><span class="s1">setEditable</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">ta</span><span class="s2">.</span><span class="s1">setWrapText</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s1">ta</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s1">texto</span><span class="s2">);</span>
+
+        <span class="s1">AnchorPane</span><span class="s2">.</span><span class="s1">setTopAnchor</span><span class="s2">(</span><span class="s1">ta</span><span class="s2">, </span><span class="s5">0.0</span><span class="s2">);</span>
+        <span class="s1">AnchorPane</span><span class="s2">.</span><span class="s1">setBottomAnchor</span><span class="s2">(</span><span class="s1">ta</span><span class="s2">, </span><span class="s5">0.0</span><span class="s2">);</span>
+        <span class="s1">AnchorPane</span><span class="s2">.</span><span class="s1">setLeftAnchor</span><span class="s2">(</span><span class="s1">ta</span><span class="s2">, </span><span class="s5">0.0</span><span class="s2">);</span>
+        <span class="s1">AnchorPane</span><span class="s2">.</span><span class="s1">setRightAnchor</span><span class="s2">(</span><span class="s1">ta</span><span class="s2">, </span><span class="s5">0.0</span><span class="s2">);</span>
+
+        <span class="s1">spInformacionProfe</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">ta</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">OnActionCatedra</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">OnActionPlanta</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionAsignaturas</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">FXMLLoader loader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span>
+                    <span class="s1">getClass</span><span class="s2">().</span><span class="s1">getResource</span><span class="s2">(</span><span class="s4">&quot;/com/example/proyectoads/admin_crear_nueva_asignatura.fxml&quot;</span><span class="s2">)</span>
+            <span class="s2">);</span>
+
+            <span class="s1">Parent root </span><span class="s2">= </span><span class="s1">loader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">();</span>
+
+            <span class="s1">Stage stage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">();</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">root</span><span class="s2">));</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionCancelar</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+        <span class="s1">Stage stage </span><span class="s2">= (</span><span class="s1">Stage</span><span class="s2">) </span><span class="s1">bCancelar</span><span class="s2">.</span><span class="s1">getScene</span><span class="s2">().</span><span class="s1">getWindow</span><span class="s2">();</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionClases</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">FXMLLoader loader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span>
+                    <span class="s1">getClass</span><span class="s2">().</span><span class="s1">getResource</span><span class="s2">(</span><span class="s4">&quot;/com/example/proyectoads/admin_consultar_datos_clase.fxml&quot;</span><span class="s2">)</span>
+            <span class="s2">);</span>
+
+            <span class="s1">Parent root </span><span class="s2">= </span><span class="s1">loader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">();</span>
+
+            <span class="s1">Stage stage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">();</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">root</span><span class="s2">));</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionConsultarCarga</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+        <span class="s1">Stage stage </span><span class="s2">= (</span><span class="s1">Stage</span><span class="s2">) </span><span class="s1">bCancelar</span><span class="s2">.</span><span class="s1">getScene</span><span class="s2">().</span><span class="s1">getWindow</span><span class="s2">();</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionDatosAcademicos</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">mostrarAlerta</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType tipo</span><span class="s2">, </span><span class="s1">String titulo</span><span class="s2">, </span><span class="s1">String mensaje</span><span class="s2">) {</span>
+        <span class="s1">Alert alerta </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">tipo</span><span class="s2">);</span>
+        <span class="s1">alerta</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s1">titulo</span><span class="s2">);</span>
+        <span class="s1">alerta</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s1">alerta</span><span class="s2">.</span><span class="s1">setContentText</span><span class="s2">(</span><span class="s1">mensaje</span><span class="s2">);</span>
+        <span class="s1">alerta</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionListar</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+
+        <span class="s1">ControllerConsultarDatos controllerConsultarDatos </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ControllerConsultarDatos</span><span class="s2">();</span>
+
+        <span class="s1">String nombreDep </span><span class="s2">= </span><span class="s1">tfDepartamento</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">();</span>
+        <span class="s1">Departamento dep </span><span class="s2">= </span><span class="s1">controllerConsultarDatos</span><span class="s2">.</span><span class="s1">buscarDepartamentoPorNombre</span><span class="s2">(</span><span class="s1">sa</span><span class="s2">, </span><span class="s1">nombreDep</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">rbPlanta</span><span class="s2">.</span><span class="s1">isSelected</span><span class="s2">()) {</span>
+            <span class="s1">listarProfesores</span><span class="s2">(</span><span class="s1">dep</span><span class="s2">, </span><span class="s4">&quot;Planta&quot;</span><span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">else if </span><span class="s2">(</span><span class="s1">rbCatedra</span><span class="s2">.</span><span class="s1">isSelected</span><span class="s2">()) {</span>
+            <span class="s1">listarProfesores</span><span class="s2">(</span><span class="s1">dep</span><span class="s2">, </span><span class="s4">&quot;Catedra&quot;</span><span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">mostrarAlerta</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">WARNING</span><span class="s2">,</span>
+                    <span class="s4">&quot;Seleccione un tipo&quot;</span><span class="s2">,</span>
+                    <span class="s4">&quot;Debe elegir si quiere listar profesores Planta o Cátedra.&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionListarProfesores</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionNomina</span><span class="s2">(</span><span class="s1">ActionEvent actionEvent</span><span class="s2">) {</span>
+
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">FXMLLoader loader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span>
+                    <span class="s1">getClass</span><span class="s2">().</span><span class="s1">getResource</span><span class="s2">(</span><span class="s4">&quot;/com/example/proyectoads/admin_crear_nueva_clase.fxml&quot;</span><span class="s2">)</span>
+            <span class="s2">);</span>
+
+            <span class="s1">Parent root </span><span class="s2">= </span><span class="s1">loader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">();</span>
+
+            <span class="s1">Stage stage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">();</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">root</span><span class="s2">));</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionDepartamento</span><span class="s2">(</span><span class="s1">ActionEvent actionEvent</span><span class="s2">) {</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+
+
+</pre>
+</body>
+</html>

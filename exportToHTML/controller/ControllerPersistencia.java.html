@@ -1,0 +1,241 @@
+<html>
+<head>
+<title>ControllerPersistencia.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ControllerPersistencia.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">controller</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">SimpleDateFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">google</span><span class="s2">.</span><span class="s1">gson</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">model</span><span class="s2">.*;</span>
+
+<span class="s0">public class </span><span class="s1">ControllerPersistencia </span><span class="s2">{</span>
+
+    <span class="s0">private static final </span><span class="s1">SimpleDateFormat DF </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SimpleDateFormat</span><span class="s2">(</span><span class="s3">&quot;yyyy-MM-dd&quot;</span><span class="s2">);</span>
+
+    <span class="s0">private static final </span><span class="s1">String ARCHIVO </span><span class="s2">= </span><span class="s3">&quot;sistema.bin&quot;</span><span class="s2">;</span>
+
+
+    <span class="s0">public static void </span><span class="s1">guardarReporteCargaJsonPlano</span><span class="s2">(</span>
+            <span class="s1">Departamento dep</span><span class="s2">,</span>
+            <span class="s1">Profesor profe</span><span class="s2">,</span>
+            <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">asignaturas</span><span class="s2">,</span>
+            <span class="s1">String nombreArchivo</span>
+    <span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">(</span><span class="s1">FileWriter fw </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileWriter</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">);</span>
+             <span class="s1">BufferedWriter bw </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BufferedWriter</span><span class="s2">(</span><span class="s1">fw</span><span class="s2">)) {</span>
+
+            <span class="s4">// Construimos JSON manualmente (solo datos planos)</span>
+            <span class="s1">StringBuilder json </span><span class="s2">= </span><span class="s0">new </span><span class="s1">StringBuilder</span><span class="s2">();</span>
+
+            <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;{</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;  </span><span class="s0">\&quot;</span><span class="s3">fecha</span><span class="s0">\&quot;</span><span class="s3">: </span><span class="s0">\&quot;</span><span class="s3">&quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Date</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\&quot;</span><span class="s3">,</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;  </span><span class="s0">\&quot;</span><span class="s3">departamento</span><span class="s0">\&quot;</span><span class="s3">: </span><span class="s0">\&quot;</span><span class="s3">&quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">dep</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\&quot;</span><span class="s3">,</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;  </span><span class="s0">\&quot;</span><span class="s3">codigoProfesor</span><span class="s0">\&quot;</span><span class="s3">: &quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">profe</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;,</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;  </span><span class="s0">\&quot;</span><span class="s3">nombreProfesor</span><span class="s0">\&quot;</span><span class="s3">: </span><span class="s0">\&quot;</span><span class="s3">&quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">profe</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\&quot;</span><span class="s3">,</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;  </span><span class="s0">\&quot;</span><span class="s3">correoProfesor</span><span class="s0">\&quot;</span><span class="s3">: </span><span class="s0">\&quot;</span><span class="s3">&quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">profe</span><span class="s2">.</span><span class="s1">getCorreo</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\&quot;</span><span class="s3">,</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;  </span><span class="s0">\&quot;</span><span class="s3">tipoProfesor</span><span class="s0">\&quot;</span><span class="s3">: </span><span class="s0">\&quot;</span><span class="s3">&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">append</span><span class="s2">((</span><span class="s1">profe </span><span class="s0">instanceof </span><span class="s1">ProfesorPlanta</span><span class="s2">) ? </span><span class="s3">&quot;Planta&quot; </span><span class="s2">: </span><span class="s3">&quot;Catedra&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\&quot;</span><span class="s3">,&quot;</span><span class="s2">);</span>
+
+            <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;  </span><span class="s0">\&quot;</span><span class="s3">asignaturas</span><span class="s0">\&quot;</span><span class="s3">: [&quot;</span><span class="s2">);</span>
+
+            <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">asignaturas</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++) {</span>
+                <span class="s1">Asignatura a </span><span class="s2">= </span><span class="s1">asignaturas</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">);</span>
+
+                <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;    {&quot;</span><span class="s2">);</span>
+                <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;      </span><span class="s0">\&quot;</span><span class="s3">codigo</span><span class="s0">\&quot;</span><span class="s3">: &quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">a</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;,</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+                <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;      </span><span class="s0">\&quot;</span><span class="s3">nombre</span><span class="s0">\&quot;</span><span class="s3">: </span><span class="s0">\&quot;</span><span class="s3">&quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">a</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\&quot;</span><span class="s3">,</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+                <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;      </span><span class="s0">\&quot;</span><span class="s3">creditos</span><span class="s0">\&quot;</span><span class="s3">: &quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">a</span><span class="s2">.</span><span class="s1">getCreditos</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+                <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;    }&quot;</span><span class="s2">);</span>
+
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">asignaturas</span><span class="s2">.</span><span class="s1">size</span><span class="s2">() - </span><span class="s5">1</span><span class="s2">) {</span>
+                    <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;,&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+                <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+            <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;  ],</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;  </span><span class="s0">\&quot;</span><span class="s3">totalAsignaturas</span><span class="s0">\&quot;</span><span class="s3">: &quot;</span><span class="s2">).</span><span class="s1">append</span><span class="s2">(</span><span class="s1">asignaturas</span><span class="s2">.</span><span class="s1">size</span><span class="s2">()).</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+            <span class="s1">json</span><span class="s2">.</span><span class="s1">append</span><span class="s2">(</span><span class="s3">&quot;}</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s2">);</span>
+
+            <span class="s1">bw</span><span class="s2">.</span><span class="s1">write</span><span class="s2">(</span><span class="s1">json</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Reporte JSON guardado correctamente en &quot; </span><span class="s2">+ </span><span class="s1">nombreArchivo</span><span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Error guardando reporte JSON: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+
+
+    <span class="s0">public static void </span><span class="s1">guardarSistemaBinario</span><span class="s2">(</span><span class="s1">SistemaAcademico sa</span><span class="s2">, </span><span class="s1">String nombreArchivo</span><span class="s2">) {</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">SistemaAcademico</span><span class="s2">&gt; </span><span class="s1">lista </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s1">lista</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">sa</span><span class="s2">);</span>
+        <span class="s1">escribirBinario</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">, </span><span class="s1">lista</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">SistemaAcademico cargarSistemaBinario</span><span class="s2">(</span><span class="s1">String nombreArchivo</span><span class="s2">) {</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">SistemaAcademico</span><span class="s2">&gt; </span><span class="s1">lista </span><span class="s2">= </span><span class="s1">leerBinario</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">lista</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) </span><span class="s0">return </span><span class="s1">SistemaAcademico</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+
+        <span class="s1">SistemaAcademico</span><span class="s2">.</span><span class="s1">setInstance</span><span class="s2">(</span><span class="s1">lista</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s5">0</span><span class="s2">));</span>
+        <span class="s0">return </span><span class="s1">SistemaAcademico</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s4">//Funcionalidades referentes a escritura y lectura de archivos binarios.</span>
+    <span class="s4">// Escritura de archivo binario con uso generalizado para guardar modelo o cualquier funcionalidad adicional</span>
+    <span class="s0">public static </span><span class="s2">&lt;</span><span class="s1">T </span><span class="s0">extends </span><span class="s1">Serializable</span><span class="s2">&gt; </span><span class="s0">void </span><span class="s1">escribirBinario</span><span class="s2">(</span><span class="s1">String nombreArch</span><span class="s2">, </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">lista</span><span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">(</span><span class="s1">FileOutputStream fos </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileOutputStream</span><span class="s2">(</span><span class="s1">nombreArch</span><span class="s2">);</span>
+             <span class="s1">ObjectOutputStream oos </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ObjectOutputStream</span><span class="s2">(</span><span class="s1">fos</span><span class="s2">)) {</span>
+
+            <span class="s1">oos</span><span class="s2">.</span><span class="s1">writeObject</span><span class="s2">(</span><span class="s1">lista</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Escritura binaria finalizada &quot;</span><span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException ex</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Error en escritura binaria &quot; </span><span class="s2">+ </span><span class="s1">ex</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s1">ex</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s4">// Lectura de binario con uso generalizado al hacer la persistencia del modelo o alguna otra funcionalidad serializable.</span>
+    <span class="s0">public static </span><span class="s2">&lt;</span><span class="s1">T </span><span class="s0">extends </span><span class="s1">Serializable</span><span class="s2">&gt; </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">leerBinario</span><span class="s2">(</span><span class="s1">String nombreArch</span><span class="s2">) {</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt; </span><span class="s1">lista </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s0">boolean </span><span class="s1">endOfFile </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+
+        <span class="s0">try </span><span class="s2">(</span><span class="s1">FileInputStream fis </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileInputStream</span><span class="s2">(</span><span class="s1">nombreArch</span><span class="s2">);</span>
+             <span class="s1">ObjectInputStream ois </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ObjectInputStream</span><span class="s2">(</span><span class="s1">fis</span><span class="s2">)) {</span>
+
+            <span class="s0">while </span><span class="s2">(!</span><span class="s1">endOfFile</span><span class="s2">) {</span>
+                <span class="s0">try </span><span class="s2">{</span>
+                    <span class="s1">Object obj </span><span class="s2">= </span><span class="s1">ois</span><span class="s2">.</span><span class="s1">readObject</span><span class="s2">();</span>
+
+                    <span class="s0">if </span><span class="s2">(</span><span class="s1">obj </span><span class="s0">instanceof </span><span class="s1">List</span><span class="s2">&lt;?&gt;) {</span>
+                        <span class="s1">lista</span><span class="s2">.</span><span class="s1">addAll</span><span class="s2">((</span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">T</span><span class="s2">&gt;) </span><span class="s1">obj</span><span class="s2">);</span>
+                        <span class="s1">endOfFile </span><span class="s2">= </span><span class="s0">true</span><span class="s2">; </span><span class="s4">// Ya no habra mas en el archivo</span>
+                    <span class="s2">}</span>
+
+                <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">EOFException e</span><span class="s2">) {</span>
+                    <span class="s1">endOfFile </span><span class="s2">= </span><span class="s0">true</span><span class="s2">; </span><span class="s4">// Final normal de archivo</span>
+
+                <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">ClassNotFoundException e</span><span class="s2">) {</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Clase no encontrada&quot;</span><span class="s2">);</span>
+
+                <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">StreamCorruptedException e</span><span class="s2">) {</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;No se pudo leer correctamente el archivo&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Lectura binaria finalizada &quot;</span><span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">FileNotFoundException e</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;No se encontro el archivo &quot;</span><span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Hubo un problema leyendo el archivo&quot;</span><span class="s2">);</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return </span><span class="s1">lista</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s4">// Funcionalidades asociadas a escritura y lectura de archivos de texto</span>
+    <span class="s0">public static void </span><span class="s1">escribirTexto</span><span class="s2">(</span><span class="s1">String nombreArchivo</span><span class="s2">, </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">lineas</span><span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">(</span><span class="s1">FileWriter fw </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileWriter</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">);</span>
+             <span class="s1">BufferedWriter salida </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BufferedWriter</span><span class="s2">(</span><span class="s1">fw</span><span class="s2">)) {</span>
+
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">String linea </span><span class="s2">: </span><span class="s1">lineas</span><span class="s2">) {</span>
+                <span class="s1">salida</span><span class="s2">.</span><span class="s1">write</span><span class="s2">(</span><span class="s1">linea</span><span class="s2">);</span>
+                <span class="s1">salida</span><span class="s2">.</span><span class="s1">newLine</span><span class="s2">();</span>
+            <span class="s2">}</span>
+
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Escritura del archivo de texto finalizada &quot;</span><span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException ex</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Error al escribir el archivo de texto  &quot; </span><span class="s2">+ </span><span class="s1">ex</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s1">ex</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s4">//Lectura de archivos de tipo texto</span>
+    <span class="s0">public static </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">leerTexto</span><span class="s2">(</span><span class="s1">String nombreArchivo</span><span class="s2">) {</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">lineas </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s0">try </span><span class="s2">(</span><span class="s1">FileReader fr </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileReader</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">);</span>
+             <span class="s1">BufferedReader entrada </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BufferedReader</span><span class="s2">(</span><span class="s1">fr</span><span class="s2">)) {</span>
+
+            <span class="s1">String linea</span><span class="s2">;</span>
+            <span class="s0">while </span><span class="s2">((</span><span class="s1">linea</span><span class="s2">= </span><span class="s1">entrada</span><span class="s2">.</span><span class="s1">readLine</span><span class="s2">()) != </span><span class="s0">null</span><span class="s2">) {</span>
+                <span class="s1">lineas</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">linea</span><span class="s2">);</span>
+            <span class="s2">}</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Lectura del archivo de texto finalizada &quot;</span><span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException ex</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">err</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Error al leer al archivo de texto &quot; </span><span class="s2">+ </span><span class="s1">ex</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s1">ex</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">lineas</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+<span class="s4">// Archivo: ControllerPersistencia.java</span>
+
+<span class="s4">// ... (tus otros métodos) ...</span>
+
+<span class="s4">// ** NUEVOS MÉTODOS PARA TEXTO **</span>
+
+    <span class="s0">public static void </span><span class="s1">guardarMensajeTexto</span><span class="s2">(</span><span class="s1">String mensaje</span><span class="s2">, </span><span class="s1">String nombreArchivo</span><span class="s2">) {</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">lineas </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s4">// Aquí, en un caso real, harías la lógica para convertir</span>
+        <span class="s4">// el objeto SistemaAcademico a varias líneas de texto.</span>
+        <span class="s4">// Para el ejemplo simple, guardamos solo un String.</span>
+        <span class="s1">lineas</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s3">&quot;Fecha de Guardado: &quot; </span><span class="s2">+ </span><span class="s1">DF</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Date</span><span class="s2">())); </span><span class="s4">// Puedes usar DF de tu clase</span>
+        <span class="s1">lineas</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s3">&quot;MENSAJE DEL SISTEMA:&quot;</span><span class="s2">);</span>
+        <span class="s1">lineas</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">mensaje</span><span class="s2">);</span>
+
+        <span class="s1">escribirTexto</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">, </span><span class="s1">lineas</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public static </span><span class="s1">String cargarMensajeTexto</span><span class="s2">(</span><span class="s1">String nombreArchivo</span><span class="s2">) {</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">lineas </span><span class="s2">= </span><span class="s1">leerTexto</span><span class="s2">(</span><span class="s1">nombreArchivo</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">lineas</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Archivo de texto vacío o no encontrado.&quot;</span><span class="s2">);</span>
+            <span class="s0">return null</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">String linea </span><span class="s2">: </span><span class="s1">lineas</span><span class="s2">) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">linea</span><span class="s2">.</span><span class="s1">startsWith</span><span class="s2">(</span><span class="s3">&quot;MENSAJE DEL SISTEMA:&quot;</span><span class="s2">)) {</span>
+
+                <span class="s0">int </span><span class="s1">index </span><span class="s2">= </span><span class="s1">lineas</span><span class="s2">.</span><span class="s1">indexOf</span><span class="s2">(</span><span class="s1">linea</span><span class="s2">);</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">index </span><span class="s2">+ </span><span class="s5">1 </span><span class="s2">&lt; </span><span class="s1">lineas</span><span class="s2">.</span><span class="s1">size</span><span class="s2">()) {</span>
+                    <span class="s0">return </span><span class="s1">lineas</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">index </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">; </span><span class="s4">// No se encontró el mensaje</span>
+    <span class="s2">}</span>
+
+
+
+
+<span class="s2">}</span></pre>
+</body>
+</html>

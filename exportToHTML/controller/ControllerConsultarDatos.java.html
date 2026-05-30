@@ -1,0 +1,489 @@
+<html>
+<head>
+<title>ControllerConsultarDatos.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ControllerConsultarDatos.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">controller</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">event</span><span class="s2">.</span><span class="s1">ActionEvent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXML</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXMLLoader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Parent</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">Alert</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">model</span><span class="s2">.*;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+
+
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">Button</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">ScrollPane</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">TextField</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">ControllerConsultarDatos </span><span class="s2">{</span>
+
+    <span class="s1">SistemaAcademico sa </span><span class="s2">= </span><span class="s1">SistemaAcademico</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+
+    <span class="s0">public </span><span class="s1">Departamento buscarDepartamentoPorNombre</span><span class="s2">(</span><span class="s1">SistemaAcademico sa</span><span class="s2">, </span><span class="s1">String nombre</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Departamento d </span><span class="s2">: </span><span class="s1">sa</span><span class="s2">.</span><span class="s1">getDepartamentos</span><span class="s2">()) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">d</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">().</span><span class="s1">equalsIgnoreCase</span><span class="s2">(</span><span class="s1">nombre</span><span class="s2">)) {</span>
+                <span class="s0">return </span><span class="s1">d</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+
+
+    <span class="s0">public </span><span class="s1">Clase buscarClasePorCodigo</span><span class="s2">(</span><span class="s1">Asignatura asignatura</span><span class="s2">, </span><span class="s0">int </span><span class="s1">codigoClase</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Clase c </span><span class="s2">: </span><span class="s1">asignatura</span><span class="s2">.</span><span class="s1">getClases</span><span class="s2">()) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">c</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">() == </span><span class="s1">codigoClase</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s1">c</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Asignatura buscarAsignaturaPorCodigo</span><span class="s2">(</span><span class="s1">Departamento departamento</span><span class="s2">, </span><span class="s0">int </span><span class="s1">codigoAsignatura</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Asignatura a </span><span class="s2">: </span><span class="s1">departamento</span><span class="s2">.</span><span class="s1">getAsignaturas</span><span class="s2">()) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">a</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">() == </span><span class="s1">codigoAsignatura</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s1">a</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Asignatura buscarAsignaturaPorCodigo</span><span class="s2">(</span><span class="s0">int </span><span class="s1">codigoAsignatura</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Asignatura a </span><span class="s2">: </span><span class="s1">sa</span><span class="s2">.</span><span class="s1">getAsignaturas</span><span class="s2">()) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">a</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">() == </span><span class="s1">codigoAsignatura</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s1">a</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Profesor buscarProfesorPorNombre</span><span class="s2">(</span><span class="s1">String nombreProfesor</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Profesor p</span><span class="s2">: </span><span class="s1">sa</span><span class="s2">.</span><span class="s1">getProfesores</span><span class="s2">()) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">p</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">nombreProfesor</span><span class="s2">)) {</span>
+                <span class="s0">return </span><span class="s1">p</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Estudiante</span><span class="s2">&gt; </span><span class="s1">consultarEstudiantesEnClase</span><span class="s2">(</span><span class="s1">Asignatura asignatura</span><span class="s2">, </span><span class="s0">int </span><span class="s1">codigoClase</span><span class="s2">){</span>
+
+        <span class="s1">Clase claseExiste</span><span class="s2">=</span><span class="s1">buscarClasePorCodigo</span><span class="s2">(</span><span class="s1">asignatura</span><span class="s2">, </span><span class="s1">codigoClase</span><span class="s2">);</span>
+
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">claseExiste</span><span class="s2">==</span><span class="s0">null</span><span class="s2">){</span>
+            <span class="s0">return null</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Inscripcion</span><span class="s2">&gt; </span><span class="s1">inscripcionesClase </span><span class="s2">= </span><span class="s1">claseExiste</span><span class="s2">.</span><span class="s1">getInscripciones</span><span class="s2">();</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Estudiante</span><span class="s2">&gt; </span><span class="s1">estudiantesEnClase </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s0">for</span><span class="s2">(</span><span class="s1">Inscripcion inscripcion </span><span class="s2">: </span><span class="s1">inscripcionesClase</span><span class="s2">){</span>
+            <span class="s1">estudiantesEnClase</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">inscripcion</span><span class="s2">.</span><span class="s1">getEstudiante</span><span class="s2">());</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return </span><span class="s1">estudiantesEnClase</span><span class="s2">;</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Estudiante buscarEstudiantePorId</span><span class="s2">(</span><span class="s0">int </span><span class="s1">idEstudiante</span><span class="s2">) {</span>
+
+<span class="s3">/* 
+        for (Asignatura asignatura : departamento.getAsignaturas()) { 
+            for (Clase clase : asignatura.getClases()) { 
+                for (Inscripcion ins : clase.getInscripciones()) { 
+ 
+                    Estudiante e = ins.getEstudiante(); 
+ 
+                    if (e.getCodigo() == idEstudiante) { 
+                        return e; 
+                    } 
+                } 
+            } 
+        } 
+*/</span>
+        <span class="s0">for</span><span class="s2">(</span><span class="s1">Estudiante e</span><span class="s2">: </span><span class="s1">sa</span><span class="s2">.</span><span class="s1">getEstudiantes</span><span class="s2">()){</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">e</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">() == </span><span class="s1">idEstudiante</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s1">e</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return null</span><span class="s2">; </span><span class="s3">// No existe</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">consultarAsignaturasEstudiante</span><span class="s2">(</span><span class="s0">int </span><span class="s1">idEstudiante</span><span class="s2">){</span>
+
+        <span class="s1">Estudiante estudianteExiste</span><span class="s2">=</span><span class="s1">buscarEstudiantePorId</span><span class="s2">(</span><span class="s1">idEstudiante</span><span class="s2">);</span>
+
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">estudianteExiste</span><span class="s2">==</span><span class="s0">null</span><span class="s2">){</span>
+            <span class="s0">return null</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Inscripcion</span><span class="s2">&gt; </span><span class="s1">inscripcionesEstudiante </span><span class="s2">= </span><span class="s1">estudianteExiste</span><span class="s2">.</span><span class="s1">getInscripciones</span><span class="s2">();</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">asignaturasEstudiante </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s0">for</span><span class="s2">(</span><span class="s1">Inscripcion inscripcion </span><span class="s2">: </span><span class="s1">inscripcionesEstudiante</span><span class="s2">){</span>
+            <span class="s1">asignaturasEstudiante</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">inscripcion</span><span class="s2">.</span><span class="s1">getClase</span><span class="s2">().</span><span class="s1">getAsignatura</span><span class="s2">());</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return </span><span class="s1">asignaturasEstudiante</span><span class="s2">;</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Profesor buscarProfesorPorId</span><span class="s2">(</span><span class="s1">Departamento dep</span><span class="s2">, </span><span class="s0">int </span><span class="s1">codigoProfesor</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Profesor p </span><span class="s2">: </span><span class="s1">dep</span><span class="s2">.</span><span class="s1">getProfesores</span><span class="s2">()) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">p</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">() == </span><span class="s1">codigoProfesor</span><span class="s2">) {</span>
+                <span class="s0">return </span><span class="s1">p</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Profesor buscarProfesorPorNombre</span><span class="s2">(</span><span class="s1">Departamento dep</span><span class="s2">, </span><span class="s1">String nombreProfesor</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Profesor p </span><span class="s2">: </span><span class="s1">dep</span><span class="s2">.</span><span class="s1">getProfesores</span><span class="s2">()) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">p</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">nombreProfesor</span><span class="s2">)) {</span>
+                <span class="s0">return </span><span class="s1">p</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">Profesor buscarProfesorPorCorreo</span><span class="s2">(</span><span class="s1">Departamento dep</span><span class="s2">, </span><span class="s1">String correoProfesor</span><span class="s2">) {</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Profesor p </span><span class="s2">: </span><span class="s1">dep</span><span class="s2">.</span><span class="s1">getProfesores</span><span class="s2">()) {</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">p</span><span class="s2">.</span><span class="s1">getCorreo</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">correoProfesor</span><span class="s2">)) {</span>
+                <span class="s0">return </span><span class="s1">p</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">consultarAsignaturasProfesor</span><span class="s2">(</span><span class="s1">Departamento dep</span><span class="s2">, </span><span class="s1">Profesor profesor</span><span class="s2">) {</span>
+
+        <span class="s1">Profesor profesorExiste </span><span class="s2">= </span><span class="s1">buscarProfesorPorId</span><span class="s2">(</span><span class="s1">dep</span><span class="s2">, </span><span class="s1">profesor</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">());</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">profesorExiste </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) </span><span class="s0">return null</span><span class="s2">;</span>
+
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">asignaturasProfesor </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Asignatura asignatura </span><span class="s2">: </span><span class="s1">dep</span><span class="s2">.</span><span class="s1">getAsignaturas</span><span class="s2">()) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">Clase clase </span><span class="s2">: </span><span class="s1">asignatura</span><span class="s2">.</span><span class="s1">getClases</span><span class="s2">()) {</span>
+
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">clase</span><span class="s2">.</span><span class="s1">getProfesorDicta</span><span class="s2">().</span><span class="s1">getNombre</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">profesorExiste</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">())) {</span>
+                    <span class="s1">asignaturasProfesor</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">asignatura</span><span class="s2">);</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return </span><span class="s1">asignaturasProfesor</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">consultarAsignaturasProfesor</span><span class="s2">(</span><span class="s1">SistemaAcademico sa</span><span class="s2">, </span><span class="s1">Profesor profesor</span><span class="s2">) {</span>
+
+        <span class="s1">Profesor profesorExiste </span><span class="s2">= </span><span class="s1">buscarProfesorPorNombre</span><span class="s2">(</span><span class="s1">profesor</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">());</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">profesorExiste </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) </span><span class="s0">return null</span><span class="s2">;</span>
+
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">asignaturasProfesor </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Asignatura asignatura </span><span class="s2">: </span><span class="s1">sa</span><span class="s2">.</span><span class="s1">getAsignaturas</span><span class="s2">()) {</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">Clase clase </span><span class="s2">: </span><span class="s1">asignatura</span><span class="s2">.</span><span class="s1">getClases</span><span class="s2">()) {</span>
+
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">clase</span><span class="s2">.</span><span class="s1">getProfesorDicta</span><span class="s2">().</span><span class="s1">getNombre</span><span class="s2">().</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">profesorExiste</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">())) {</span>
+                    <span class="s1">asignaturasProfesor</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">asignatura</span><span class="s2">);</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s0">return </span><span class="s1">asignaturasProfesor</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+
+    <span class="s0">public void </span><span class="s1">consultarDatosEstudiante</span><span class="s2">(</span><span class="s0">int </span><span class="s1">idEstudiante</span><span class="s2">){</span>
+
+        <span class="s1">Estudiante estudianteExiste</span><span class="s2">=</span><span class="s1">buscarEstudiantePorId</span><span class="s2">(</span><span class="s1">idEstudiante</span><span class="s2">);</span>
+
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">estudianteExiste</span><span class="s2">==</span><span class="s0">null</span><span class="s2">){</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;No existe el estudiante&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">estudianteExiste</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+
+            <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">asignaturasEstudiante </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+            <span class="s1">asignaturasEstudiante</span><span class="s2">=</span><span class="s1">consultarAsignaturasEstudiante</span><span class="s2">(</span><span class="s1">idEstudiante</span><span class="s2">);</span>
+
+            <span class="s0">for</span><span class="s2">(</span><span class="s1">Asignatura a</span><span class="s2">: </span><span class="s1">asignaturasEstudiante</span><span class="s2">){</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">a</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+            <span class="s2">}</span>
+
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">consultarDatosProfesor</span><span class="s2">(</span><span class="s1">Departamento dep</span><span class="s2">, </span><span class="s1">Profesor profe</span><span class="s2">){</span>
+
+        <span class="s1">Profesor profesorExiste</span><span class="s2">=</span><span class="s1">buscarProfesorPorId</span><span class="s2">(</span><span class="s1">dep</span><span class="s2">, </span><span class="s1">profe</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">());</span>
+
+        <span class="s0">if</span><span class="s2">(</span><span class="s1">profesorExiste</span><span class="s2">==</span><span class="s0">null</span><span class="s2">){</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;No existe el profesor&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">profesorExiste</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+
+            <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Asignatura</span><span class="s2">&gt; </span><span class="s1">asignaturasProfesor </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+            <span class="s1">asignaturasProfesor</span><span class="s2">=</span><span class="s1">consultarAsignaturasProfesor</span><span class="s2">(</span><span class="s1">dep</span><span class="s2">, </span><span class="s1">profe</span><span class="s2">);</span>
+
+            <span class="s0">for</span><span class="s2">(</span><span class="s1">Asignatura a</span><span class="s2">: </span><span class="s1">asignaturasProfesor</span><span class="s2">){</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">a</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bAsignaturas</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bCancelar</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bClases</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bDatosAcademicos</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button bGuardar</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ScrollPane spDatosEstudiantes</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextField tfIdAsignatura</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextField tfIdClase</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">TextArea taConsulta</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionAsignaturas</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+
+        <span class="s1">String rol </span><span class="s2">= </span><span class="s1">sa</span><span class="s2">.</span><span class="s1">getRolSeleccionado</span><span class="s2">();</span>
+        <span class="s1">String pantalla</span><span class="s2">;</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s4">&quot;PROFESOR&quot;</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">rol</span><span class="s2">)) {</span>
+            <span class="s1">pantalla </span><span class="s2">= </span><span class="s4">&quot;/com/example/proyectoads/admin_crear_nueva_asignatura.fxml&quot;</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">pantalla </span><span class="s2">= </span><span class="s4">&quot;/com/example/proyectoads/estudiante_consultar_asignaturas.fxml&quot;</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">FXMLLoader loader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span>
+                    <span class="s1">getClass</span><span class="s2">().</span><span class="s1">getResource</span><span class="s2">(</span><span class="s1">pantalla</span><span class="s2">)</span>
+            <span class="s2">);</span>
+
+            <span class="s1">Parent root </span><span class="s2">= </span><span class="s1">loader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">();</span>
+
+            <span class="s1">Stage stage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">();</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">root</span><span class="s2">));</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionClases</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionDatosAcademicos</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+
+        <span class="s1">String rol </span><span class="s2">= </span><span class="s1">sa</span><span class="s2">.</span><span class="s1">getRolSeleccionado</span><span class="s2">();</span>
+        <span class="s1">String pantalla</span><span class="s2">;</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s4">&quot;PROFESOR&quot;</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s1">rol</span><span class="s2">)) {</span>
+            <span class="s1">pantalla </span><span class="s2">= </span><span class="s4">&quot;/com/example/proyectoads/admin_consultar_carga_profesor.fxml&quot;</span><span class="s2">;</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">pantalla </span><span class="s2">= </span><span class="s4">&quot;/com/example/proyectoads/estudiante_consultar_datos_academicos.fxml&quot;</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">FXMLLoader loader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span>
+                    <span class="s1">getClass</span><span class="s2">().</span><span class="s1">getResource</span><span class="s2">(</span><span class="s1">pantalla</span><span class="s2">)</span>
+            <span class="s2">);</span>
+
+            <span class="s1">Parent root </span><span class="s2">= </span><span class="s1">loader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">();</span>
+
+            <span class="s1">Stage stage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">();</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">root</span><span class="s2">));</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionCancelar</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+        <span class="s1">Stage stage </span><span class="s2">= (</span><span class="s1">Stage</span><span class="s2">) </span><span class="s1">bCancelar</span><span class="s2">.</span><span class="s1">getScene</span><span class="s2">().</span><span class="s1">getWindow</span><span class="s2">();</span>
+        <span class="s1">stage</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">mostrarAlerta</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType tipo</span><span class="s2">, </span><span class="s1">String titulo</span><span class="s2">, </span><span class="s1">String mensaje</span><span class="s2">) {</span>
+        <span class="s1">Alert alerta </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">tipo</span><span class="s2">);</span>
+        <span class="s1">alerta</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s1">titulo</span><span class="s2">);</span>
+        <span class="s1">alerta</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s1">alerta</span><span class="s2">.</span><span class="s1">setContentText</span><span class="s2">(</span><span class="s1">mensaje</span><span class="s2">);</span>
+        <span class="s1">alerta</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionGuardar</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s3">// 1. Convertir los TextField a enteros</span>
+            <span class="s0">int </span><span class="s1">idAsignatura </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">tfIdAsignatura</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">());</span>
+            <span class="s0">int </span><span class="s1">idClase </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">tfIdClase</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">());</span>
+
+            <span class="s3">// 2. Buscar la asignatura</span>
+            <span class="s1">Asignatura asignatura </span><span class="s2">= </span><span class="s1">buscarAsignaturaPorCodigo</span><span class="s2">(</span><span class="s1">idAsignatura</span><span class="s2">);</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">asignatura </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+                <span class="s1">mostrarAlerta</span><span class="s2">(</span>
+                        <span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">ERROR</span><span class="s2">,</span>
+                        <span class="s4">&quot;Asignatura no encontrada&quot;</span><span class="s2">,</span>
+                        <span class="s4">&quot;No existe una asignatura con el ID: &quot; </span><span class="s2">+ </span><span class="s1">idAsignatura</span>
+                <span class="s2">);</span>
+                <span class="s0">return</span><span class="s2">;</span>
+            <span class="s2">}</span>
+
+            <span class="s3">// 3. Buscar la clase dentro de la asignatura</span>
+            <span class="s1">Clase clase </span><span class="s2">= </span><span class="s1">buscarClasePorCodigo</span><span class="s2">(</span><span class="s1">asignatura</span><span class="s2">, </span><span class="s1">idClase</span><span class="s2">);</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">clase </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+                <span class="s1">mostrarAlerta</span><span class="s2">(</span>
+                        <span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">ERROR</span><span class="s2">,</span>
+                        <span class="s4">&quot;Clase no encontrada&quot;</span><span class="s2">,</span>
+                        <span class="s4">&quot;La asignatura existe, pero no hay una clase con el ID: &quot; </span><span class="s2">+ </span><span class="s1">idClase</span>
+                <span class="s2">);</span>
+                <span class="s0">return</span><span class="s2">;</span>
+            <span class="s2">}</span>
+
+            <span class="s3">// 4. Obtener los estudiantes inscritos</span>
+            <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Estudiante</span><span class="s2">&gt; </span><span class="s1">estudiantes </span><span class="s2">=</span>
+                    <span class="s1">consultarEstudiantesEnClase</span><span class="s2">(</span><span class="s1">asignatura</span><span class="s2">, </span><span class="s1">clase</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">());</span>
+
+            <span class="s3">// 5. Construir el texto de salida</span>
+            <span class="s1">taConsulta</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">();</span>
+            <span class="s1">taConsulta</span><span class="s2">.</span><span class="s1">appendText</span><span class="s2">(</span><span class="s4">&quot;=== INFORMACIÓN DE LA CLASE ===</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+            <span class="s1">taConsulta</span><span class="s2">.</span><span class="s1">appendText</span><span class="s2">(</span><span class="s4">&quot;Asignatura: &quot; </span><span class="s2">+ </span><span class="s1">asignatura</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">() + </span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+            <span class="s1">taConsulta</span><span class="s2">.</span><span class="s1">appendText</span><span class="s2">(</span><span class="s4">&quot;Profesor: &quot; </span><span class="s2">+ </span><span class="s1">clase</span><span class="s2">.</span><span class="s1">getProfesorDicta</span><span class="s2">().</span><span class="s1">getNombre</span><span class="s2">() + </span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+            <span class="s1">taConsulta</span><span class="s2">.</span><span class="s1">appendText</span><span class="s2">(</span><span class="s4">&quot;Código clase: &quot; </span><span class="s2">+ </span><span class="s1">clase</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">() + </span><span class="s4">&quot;</span><span class="s0">\n\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+
+            <span class="s1">taConsulta</span><span class="s2">.</span><span class="s1">appendText</span><span class="s2">(</span><span class="s1">clase</span><span class="s2">.</span><span class="s1">mostrarHorario</span><span class="s2">() + </span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+
+            <span class="s1">taConsulta</span><span class="s2">.</span><span class="s1">appendText</span><span class="s2">(</span><span class="s4">&quot;=== ESTUDIANTES INSCRITOS ===</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">estudiantes </span><span class="s2">== </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">estudiantes</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+                <span class="s1">taConsulta</span><span class="s2">.</span><span class="s1">appendText</span><span class="s2">(</span><span class="s4">&quot;No hay estudiantes inscritos en esta clase.</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s0">for </span><span class="s2">(</span><span class="s1">Estudiante estudiante </span><span class="s2">: </span><span class="s1">estudiantes</span><span class="s2">) {</span>
+                    <span class="s1">taConsulta</span><span class="s2">.</span><span class="s1">appendText</span><span class="s2">(</span><span class="s4">&quot;- &quot; </span><span class="s2">+ </span><span class="s1">estudiante</span><span class="s2">.</span><span class="s1">getNombre</span><span class="s2">() +</span>
+                            <span class="s4">&quot; (ID &quot; </span><span class="s2">+ </span><span class="s1">estudiante</span><span class="s2">.</span><span class="s1">getCodigo</span><span class="s2">() + </span><span class="s4">&quot;)</span><span class="s0">\n</span><span class="s4">&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">NumberFormatException e</span><span class="s2">) {</span>
+            <span class="s1">mostrarAlerta</span><span class="s2">(</span>
+                    <span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">WARNING</span><span class="s2">,</span>
+                    <span class="s4">&quot;Formato inválido&quot;</span><span class="s2">,</span>
+                    <span class="s4">&quot;Debes ingresar números válidos para:</span><span class="s0">\n</span><span class="s4">• ID Asignatura</span><span class="s0">\n</span><span class="s4">• ID Clase&quot;</span>
+            <span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">mostrarAlerta</span><span class="s2">(</span>
+                    <span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">ERROR</span><span class="s2">,</span>
+                    <span class="s4">&quot;Error inesperado&quot;</span><span class="s2">,</span>
+                    <span class="s4">&quot;Ha ocurrido un error interno:</span><span class="s0">\n</span><span class="s4">&quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">()</span>
+            <span class="s2">);</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionIdAsignatura</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">onActionIdClase</span><span class="s2">(</span><span class="s1">ActionEvent event</span><span class="s2">) {</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">OnActionCrearClase</span><span class="s2">(</span><span class="s1">ActionEvent actionEvent</span><span class="s2">) {</span>
+
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">FXMLLoader loader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span>
+                    <span class="s1">getClass</span><span class="s2">().</span><span class="s1">getResource</span><span class="s2">(</span><span class="s4">&quot;/com/example/proyectoads/admin_crear_nueva_clase.fxml&quot;</span><span class="s2">)</span>
+            <span class="s2">);</span>
+
+            <span class="s1">Parent root </span><span class="s2">= </span><span class="s1">loader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">();</span>
+
+            <span class="s1">Stage stage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">();</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">root</span><span class="s2">));</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">OnActionConsultarClase</span><span class="s2">(</span><span class="s1">ActionEvent actionEvent</span><span class="s2">) {</span>
+    <span class="s2">}</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">void </span><span class="s1">OnActionInscribirClase</span><span class="s2">(</span><span class="s1">ActionEvent actionEvent</span><span class="s2">) {</span>
+
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">FXMLLoader loader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span>
+                    <span class="s1">getClass</span><span class="s2">().</span><span class="s1">getResource</span><span class="s2">(</span><span class="s4">&quot;/com/example/proyectoads/estudiante_Inscribir_Clase.fxml&quot;</span><span class="s2">)</span>
+            <span class="s2">);</span>
+
+            <span class="s1">Parent root </span><span class="s2">= </span><span class="s1">loader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">();</span>
+
+            <span class="s1">Stage stage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">();</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">root</span><span class="s2">));</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

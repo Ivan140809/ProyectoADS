@@ -1,0 +1,38 @@
+
+========== NUEVO REPORTE ==========
+Fecha: Sun Nov 23 01:12:50 GMT-05:00 2025
+Profesor: ProfesorPlanta{
+ codigo=1101,
+  nombre='Ana Torres',
+  correo='ana.torres@uni.edu',
+  tipo='Planta',
+  salario=5600000.0}
+Asignaturas asignadas:
+- Programación I
+Total de asignaturas: 1
+
+========== NUEVO REPORTE ==========
+Fecha: Sun Nov 23 01:13:00 GMT-05:00 2025
+Profesor: ProfesorPlanta{
+ codigo=5001,
+  nombre='Claudia Gómez',
+  correo='cgomez@uni.edu',
+  tipo='Planta',
+  salario=7500000.0}
+Asignaturas asignadas:
+- Programación I
+- Redes I
+Total de asignaturas: 2
+
+========== NUEVO REPORTE ==========
+Fecha: Sun Nov 23 22:13:38 GMT-05:00 2025
+Profesor: ProfesorPlanta{
+ codigo=1101,
+  nombre='Ana Torres',
+  correo='ana.torres@uni.edu',
+  tipo='Planta',
+  salario=5600000.0}
+Asignaturas asignadas:
+- Programación I
+Total de asignaturas: 1
+
