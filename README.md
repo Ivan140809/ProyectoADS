@@ -1,4 +1,4 @@
-# ProyectoADS
+# SistemaUniversitario (Proyecto enmarcado en la asignatura de Analisis y diseño de software (ADS) )
 
 ![Java](https://img.shields.io/badge/Java-25-orange?style=for-the-badge&logo=openjdk&logoColor=white)
 ![JavaFX](https://img.shields.io/badge/JavaFX-21-007396?style=for-the-badge&logo=java&logoColor=white)
